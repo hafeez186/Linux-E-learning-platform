@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Build and Deploy to GitHub Pages
 
 on:
   push:
@@ -11,29 +11,42 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
+    - name: 📂 Checkout Repository
+      uses: actions/checkout@v4
       
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
+    - name: 🟢 Setup Node.js
+      uses: actions/setup-node@v4
       with:
         node-version: '18'
         cache: 'npm'
         cache-dependency-path: client/package-lock.json
         
-    - name: Install dependencies
+    - name: 📦 Install Dependencies
       run: |
         cd client
         npm ci
         
-    - name: Build application
+    - name: 🔍 Run Linting
+      run: |
+        cd client
+        npm run lint --if-present
+        
+    - name: 🧪 Run Tests
+      run: |
+        cd client
+        npm test -- --coverage --watchAll=false
+        
+    - name: 🏗️ Build Application
       run: |
         cd client
         npm run build
         
-    - name: Deploy to GitHub Pages
+    - name: 🚀 Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       if: github.ref == 'refs/heads/main'
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./client/build
+        user_name: 'github-actions[bot]'
+        user_email: 'github-actions[bot]@users.noreply.github.com'
+        commit_message: 'Deploy to GitHub Pages'
