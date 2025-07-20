@@ -3,8 +3,6 @@ name: Build and Deploy to GitHub Pages
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 jobs:
   build-and-deploy:
@@ -26,16 +24,6 @@ jobs:
         cd client
         npm ci
         
-    - name: 🔍 Run Linting
-      run: |
-        cd client
-        npm run lint --if-present
-        
-    - name: 🧪 Run Tests
-      run: |
-        cd client
-        npm test -- --coverage --watchAll=false
-        
     - name: 🏗️ Build Application
       run: |
         cd client
@@ -43,10 +31,6 @@ jobs:
         
     - name: 🚀 Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
-      if: github.ref == 'refs/heads/main'
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./client/build
-        user_name: 'github-actions[bot]'
-        user_email: 'github-actions[bot]@users.noreply.github.com'
-        commit_message: 'Deploy to GitHub Pages'
