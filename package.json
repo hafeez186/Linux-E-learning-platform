@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "cd client && npm start",
-    "build": "cd client && npm run build:win",
-    "build-and-deploy": "cd client && npm install && npm run build:win",
+    "build": "cd client && npm run build:deploy",
+    "build-and-deploy": "cd client && npm install && npm run build:deploy",
     "build:vercel": "cd client && npm install && npm run build:vercel",
     "install-client": "cd client && npm install",
     "heroku-postbuild": "npm run install-client && npm run build"
