@@ -1,0 +1,27 @@
+{
+  "name": "linux-elearning-platform",
+  "version": "1.0.0",
+  "description": "A comprehensive Linux e-learning platform with real-world scenarios",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "cd client && npm start",
+    "build": "cd client && npm run build",
+    "install-client": "cd client && npm install",
+    "heroku-postbuild": "npm run install-client && npm run build"
+  },
+  "keywords": [
+    "linux",
+    "devops",
+    "education",
+    "elearning",
+    "system-administration"
+  ],
+  "author": "Hafeez",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hafeez186/Linux-E-learning-platform.git"
+  },
+  "homepage": "https://hafeez186.github.io/Linux-E-learning-platform"
+}
